@@ -32,38 +32,22 @@ pip install -e .
 ## Basic Usage
 
 ```python
-import numpy as np
 import pandas as pd
 from mhtexp2 import mhtexp2
 
-# Generate sample experimental data
-np.random.seed(42)
-n_obs = 200
-
-# Create outcome variables
-Y = np.random.randn(n_obs, 2)  # 2 outcomes
-# Add treatment effects
-Y[100:, 0] += 0.5  # Treatment effect on outcome 1
-
-# Treatment assignment (0=control, 1=treatment1, 2=treatment2)
-treatment = np.concatenate([np.zeros(67), np.ones(67), np.full(66, 2)])
-
-# Control variables
-controls = np.random.randn(n_obs, 2)
-
-# Subgroup indicator
-subgroup = np.random.choice([1, 2], n_obs)
+# Load your experimental data
+df = pd.read_csv("your_experiment_data.csv")
 
 # Run multiple hypothesis testing
 results = mhtexp2(
-    Y=Y,
-    treatment=treatment,
-    controls=controls,
-    subgroup=subgroup,
-    combo="pairwise",
-    bootstrap=3000,
-    studentized=True,
-    transitivity_check=True
+    Y=df[["outcome1", "outcome2", "outcome3"]],  # Your outcome variables
+    treatment=df["treatment"],                    # Treatment assignment
+    controls=df[["control1", "control2"]],       # Optional control variables
+    subgroup=df["subgroup"],                     # Optional subgroup variable
+    combo="pairwise",                           # Compare all treatment pairs
+    bootstrap=3000,                             # Number of bootstrap samples
+    studentized=True,                           # Use studentized test statistics
+    transitivity_check=True                     # Apply transitivity corrections
 )
 
 # View results DataFrame
@@ -118,7 +102,13 @@ cd tests/testthat
 python bootstrap_test_with_stata.py
 ```
 
-This requires Stata to be installed and generates comparison tables showing exact replication of Stata results.
+This function requires Stata to be installed and will:
+1. Generate test data and run the original Stata `mhtexp2` procedure
+2. Export bootstrap samples and results from Stata  
+3. Apply Python corrections using the same bootstrap data
+4. Generate detailed comparison tables showing exact replication
+
+You can also validate against your own Stata results by running the bootstrap test with your data.
 
 ## Package Structure
 
