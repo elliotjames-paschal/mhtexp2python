@@ -102,42 +102,12 @@ cd tests/testthat
 python bootstrap_test_with_stata.py
 ```
 
-This function requires Stata to be installed and will:
-1. Generate test data and run the original Stata `mhtexp2` procedure
-2. Export bootstrap samples and results from Stata  
-3. Apply Python corrections using the same bootstrap data
-4. Generate detailed comparison tables showing exact replication
-
+## Additional Test Files
+- export_bootstrap.do - Modified Stata script that exports intermediate bootstrap values
+- run_test.do - Functions to import and compare detailed Stata exports with Python calculations
+- bootstrap_test_with_stata.py - Run this to test Stata bootstraps in Python
+Standard tests - Located in tests/testthat/
 You can also validate against your own Stata results by running the bootstrap test with your data.
-
-## Package Structure
-
-```
-mhtexp2python/
-├── mhtexp2/
-│   ├── __init__.py          # Package initialization
-│   ├── core.py              # Main mhtexp2() function
-│   ├── bootstrap.py         # Bootstrap inference procedures
-│   ├── corrections.py       # P-value correction methods
-│   └── utils.py             # Helper functions
-├── tests/testthat/          # Validation tests
-├── examples/                # Usage examples
-└── docs/                    # Documentation
-```
-
-## Citation
-
-If you use this package in your research, please cite:
-
-```bibtex
-@article{list2023multiple,
-  title={Multiple Testing with Covariate Adjustment in Experimental Economics},
-  author={List, John A and Shaikh, Azeem M and Vayalinkal, Jaap P},
-  journal={Experimental Economics},
-  year={2023},
-  publisher={Springer}
-}
-```
 
 ## References
 
