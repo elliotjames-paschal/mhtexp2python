@@ -45,7 +45,7 @@ results = mhtexp2(
     controls=df[["control1", "control2"]],       # Optional control variables
     subgroup=df["subgroup"],                     # Optional subgroup variable
     combo="pairwise",                           # Compare all treatment pairs
-    bootstrap=3000,                             # Number of bootstrap samples
+    bootstrap=5000,                             # Number of bootstrap samples
     studentized=True,                           # Use studentized test statistics
     transitivity_check=True                     # Apply transitivity corrections
 )
