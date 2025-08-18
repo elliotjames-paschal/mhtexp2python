@@ -91,8 +91,6 @@ This package implements the multiple hypothesis testing framework from List, Sha
 - **Bonferroni correction**: Conservative multiple testing adjustment
 - **Holm procedure**: Step-down multiple testing method
 
-All procedures use bootstrap-based inference to provide robust statistical inference without strong distributional assumptions.
-
 ## Validation
 
 The package includes validation tools to compare results with the original Stata implementation:
